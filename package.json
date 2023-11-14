@@ -10,8 +10,13 @@
   },
   "dependencies": {
     "@hookform/resolvers": "^3.3.2",
-    "@nextui-org/react": "^2.2.9",
+    "@mantine/core": "^7.2.1",
+    "@mantine/form": "^7.2.2",
+    "@mantine/hooks": "^7.2.1",
     "@prisma/client": "5.5.2",
+    "@tanstack/react-query": "^5.8.2",
+    "@tanstack/react-query-devtools": "^5.8.2",
+    "@tanstack/react-query-next-experimental": "^5.8.2",
     "framer-motion": "^10.16.4",
     "next": "14.0.1",
     "react": "^18",
@@ -25,8 +30,10 @@
     "@types/react-dom": "^18",
     "eslint": "^8",
     "eslint-config-next": "14.0.1",
+    "postcss": "^8.4.31",
+    "postcss-preset-mantine": "^1.11.0",
+    "postcss-simple-vars": "^7.0.1",
     "prisma": "5.5.2",
-    "tailwindcss": "^3.3.5",
     "typescript": "^5"
   }
 }
