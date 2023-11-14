@@ -1,14 +1,15 @@
+"use client";
+
 import styles from "./exams-score-form.module.css";
-import { useFieldArray, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useGetExamSubjects } from "@/hooks/query/use-get-exam-subjects";
 import { Button, SimpleGrid, TextInput } from "@mantine/core";
 
 export const ExamsScoreForm = () => {
-  const { data, isLoading, isError } = useGetExamSubjects();
+  const { data } = useGetExamSubjects();
 
   const {
     register,
-    control,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -22,10 +23,8 @@ export const ExamsScoreForm = () => {
     console.log(data);
   };
 
-  console.log("here is my component");
-
   return (
-    <>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <SimpleGrid spacing={32} cols={{ base: 1, sm: 2, lg: 3 }}>
         {data.map((item, index) => (
           <TextInput
@@ -49,19 +48,18 @@ export const ExamsScoreForm = () => {
                 message: "error message",
               },
             })}
-            name={`yourScore.${index}`}
           />
         ))}
       </SimpleGrid>
       <Button
-        onClick={() => onSubmit({ yourScore: [0] })}
         size="xl"
         radius="md"
+        type="submit"
         variant="gradient"
         gradient={{ from: "blue", to: "cyan", deg: 90 }}
       >
         Искать
       </Button>
-    </>
+    </form>
   );
 };
