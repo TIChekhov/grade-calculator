@@ -1,4 +1,3 @@
-import styles from "./exams-score-form.module.css";
 import { useFieldArray, useForm } from "react-hook-form";
 import { useGetExamSubjects } from "@/hooks/query/use-get-exam-subjects";
 import { Button, SimpleGrid, TextInput } from "@mantine/core";
@@ -21,8 +20,6 @@ export const ExamsScoreForm = () => {
   const onSubmit = (data: { yourScore: number[] }) => {
     console.log(data);
   };
-
-  console.log("here is my component");
 
   return (
     <>
@@ -54,8 +51,9 @@ export const ExamsScoreForm = () => {
         ))}
       </SimpleGrid>
       <Button
-        onClick={() => onSubmit({ yourScore: [0] })}
+        onClick={() => console.log("hrererer")}
         size="xl"
+        type="submit"
         radius="md"
         variant="gradient"
         gradient={{ from: "blue", to: "cyan", deg: 90 }}
