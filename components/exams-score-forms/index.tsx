@@ -1,30 +1,33 @@
-import { useFieldArray, useForm } from "react-hook-form";
-import { useGetExamSubjects } from "@/hooks/query/use-get-exam-subjects";
+import { useForm } from "react-hook-form";
+import styles from "./exams-score-form.module.css";
 import { Button, SimpleGrid, TextInput } from "@mantine/core";
+import { Exam } from "@/types";
 
-export const ExamsScoreForm = () => {
-  const { data, isLoading, isError } = useGetExamSubjects();
-
+export const ExamsScoreForm = ({ exams }: { exams: Exam[] }) => {
   const {
     register,
-    control,
     handleSubmit,
     formState: { errors },
   } = useForm({
     defaultValues: {
-      yourScore: data.map(() => 0),
+      exams: exams.map((item) => ({
+        ...item,
+        yourScore: null,
+      })),
     },
     mode: "onSubmit",
   });
 
-  const onSubmit = (data: { yourScore: number[] }) => {
+  const onSubmit = (data: {
+    exams: (Exam & { yourScore: number | null })[];
+  }) => {
     console.log(data);
   };
 
   return (
-    <>
+    <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <SimpleGrid spacing={32} cols={{ base: 1, sm: 2, lg: 3 }}>
-        {data.map((item, index) => (
+        {exams.map((item, index) => (
           <TextInput
             w="100%"
             size="xl"
@@ -34,9 +37,8 @@ export const ExamsScoreForm = () => {
             placeholder={`От ${item.minScore} до 100`}
             maxLength={3}
             label={item.title}
-            error={errors?.yourScore?.[index]?.message}
-            {...register(`yourScore.${index}` as const, {
-              required: "error message",
+            error={errors?.exams?.[index]?.yourScore?.message}
+            {...register(`exams.${index}.yourScore` as const, {
               minLength: {
                 value: 2,
                 message: "error message",
@@ -46,20 +48,18 @@ export const ExamsScoreForm = () => {
                 message: "error message",
               },
             })}
-            name={`yourScore.${index}`}
           />
         ))}
       </SimpleGrid>
       <Button
-        onClick={() => console.log("hrererer")}
         size="xl"
-        type="submit"
         radius="md"
+        type="submit"
         variant="gradient"
         gradient={{ from: "blue", to: "cyan", deg: 90 }}
       >
         Искать
       </Button>
-    </>
+    </form>
   );
 };

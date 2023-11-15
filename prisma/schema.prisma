@@ -18,7 +18,7 @@ model ExamSubject {
     title            String                           @default("")
     description      String                           @default("")
     minScore         Int                              @default(20)
-    type             String                           @default("main")
+    type             String                           @default("main") // main | additional
     learningProfiles ExamSubjectsOnLearningProfiles[]
     createdAt        DateTime                         @default(now())
     updatedAt        DateTime                         @default(now())
@@ -36,6 +36,7 @@ model LearningDirection {
 model LearningProfile {
     id                  Int                              @id @default(autoincrement())
     title               String                           @default("")
+    description         String                           @default("")
     exams               ExamSubjectsOnLearningProfiles[]
     learningDirection   LearningDirection?               @relation(fields: [learningDirectionId], references: [id])
     learningDirectionId Int?
@@ -48,6 +49,7 @@ model ExamSubjectsOnLearningProfiles {
     examId            Int
     learningProfile   LearningProfile @relation(fields: [learningProfileId], references: [id])
     learningProfileId Int
+    type              String          @default("mandatory") // mandatory | elective
     createdAt         DateTime        @default(now())
     updatedAt         DateTime        @default(now())
 

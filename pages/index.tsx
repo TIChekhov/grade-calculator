@@ -1,8 +1,10 @@
-import { MyButton } from "@/components/button";
 import { ExamsScoreForm } from "@/components/exams-score-forms";
+import { prisma } from "@/prisma/prisma";
+import { Exam } from "@/types";
 import { Container, Text } from "@mantine/core";
+import { GetServerSideProps } from "next";
 
-export default function Home() {
+export default function Home({ exams }: { exams: Exam[] }) {
   return (
     <Container
       style={{
@@ -20,8 +22,20 @@ export default function Home() {
       >
         Введите свои баллы ЕГЭ
       </Text>
-      <MyButton />
-      {/* <ExamsScoreForm /> */}
+      <ExamsScoreForm exams={exams} />
     </Container>
   );
 }
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  const exams = await prisma.examSubject.findMany({
+    select: {
+      id: true,
+      title: true,
+      description: true,
+      minScore: true,
+      type: true,
+    },
+  });
+  return { props: { exams: exams ?? [] } };
+};
