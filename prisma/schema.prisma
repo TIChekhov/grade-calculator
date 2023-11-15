@@ -13,12 +13,22 @@ datasource db {
     directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
+enum ExamSubjectType {
+    main
+    additional
+}
+
+enum ExamSubjectsOnLearningProfilesType {
+    mandatory
+    elective
+}
+
 model ExamSubject {
     id               Int                              @id @default(autoincrement())
     title            String                           @default("")
-    description      String                           @default("")
+    description      String?                          @default("")
     minScore         Int                              @default(20)
-    type             String                           @default("main") // main | additional
+    type             ExamSubjectType?
     learningProfiles ExamSubjectsOnLearningProfiles[]
     createdAt        DateTime                         @default(now())
     updatedAt        DateTime                         @default(now())
@@ -27,7 +37,7 @@ model ExamSubject {
 model LearningDirection {
     id              Int               @id @default(autoincrement())
     title           String            @default("")
-    description     String            @default("")
+    description     String?           @default("")
     learningProfile LearningProfile[]
     createdAt       DateTime          @default(now())
     updatedAt       DateTime          @default(now())
@@ -36,7 +46,7 @@ model LearningDirection {
 model LearningProfile {
     id                  Int                              @id @default(autoincrement())
     title               String                           @default("")
-    description         String                           @default("")
+    description         String?                          @default("")
     exams               ExamSubjectsOnLearningProfiles[]
     learningDirection   LearningDirection?               @relation(fields: [learningDirectionId], references: [id])
     learningDirectionId Int?
@@ -45,13 +55,13 @@ model LearningProfile {
 }
 
 model ExamSubjectsOnLearningProfiles {
-    exam              ExamSubject     @relation(fields: [examId], references: [id])
+    exam              ExamSubject                        @relation(fields: [examId], references: [id])
     examId            Int
-    learningProfile   LearningProfile @relation(fields: [learningProfileId], references: [id])
+    learningProfile   LearningProfile                    @relation(fields: [learningProfileId], references: [id])
     learningProfileId Int
-    type              String          @default("mandatory") // mandatory | elective
-    createdAt         DateTime        @default(now())
-    updatedAt         DateTime        @default(now())
+    type              ExamSubjectsOnLearningProfilesType
+    createdAt         DateTime                           @default(now())
+    updatedAt         DateTime                           @default(now())
 
     @@id([examId, learningProfileId])
 }

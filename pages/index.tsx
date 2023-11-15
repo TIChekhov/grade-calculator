@@ -1,29 +1,14 @@
-import { ExamsScoreForm } from "@/components/exams-score-forms";
+import { ExamsScoreForm } from "@/components/exams-score-form";
+import { Layout } from "@/components/layout";
 import { prisma } from "@/prisma/prisma";
-import { Exam } from "@/types";
-import { Container, Text } from "@mantine/core";
-import { GetServerSideProps } from "next";
+import type { Exam } from "@/types";
+import type { GetServerSideProps } from "next/types";
 
-export default function Home({ exams }: { exams: Exam[] }) {
+export default function Index({ exams }: { exams: Exam[] }) {
   return (
-    <Container
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        padding: "32px",
-        gap: "32px",
-      }}
-    >
-      <Text
-        fz={64}
-        fw={900}
-        variant="gradient"
-        gradient={{ from: "blue", to: "cyan", deg: 90 }}
-      >
-        Введите свои баллы ЕГЭ
-      </Text>
+    <Layout title="Введите свои баллы ЕГЭ">
       <ExamsScoreForm exams={exams} />
-    </Container>
+    </Layout>
   );
 }
 
