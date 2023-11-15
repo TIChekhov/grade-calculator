@@ -26,3 +26,22 @@ export interface LearningDirection {
   description: string | null;
   learningProfile: LearningProfile[];
 }
+
+export interface MetaConfig {
+  title: string;
+  description: string;
+  image: string;
+  openGraph: {
+    site_name: string;
+    type: string;
+    url: string;
+    title: string;
+    description: string;
+    images: {
+      url: string;
+      width: number;
+      height: number;
+      alt: string;
+    }[];
+  };
+}
