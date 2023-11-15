@@ -1,9 +1,8 @@
-import { ExamsScoreForm } from "@/components/exams-score-form";
 import { Layout } from "@/components/layout";
 import { LearningDirection } from "@/components/learning-direction";
 import { prisma } from "@/prisma/prisma";
 import type { LearningDirection as LearningDirectionType } from "@/types";
-import { Grid, SimpleGrid } from "@mantine/core";
+import { Grid } from "@mantine/core";
 import type { GetServerSideProps } from "next/types";
 
 export default function Calculated({
