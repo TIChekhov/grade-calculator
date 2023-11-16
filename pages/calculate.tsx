@@ -24,7 +24,7 @@ export default function Calculated({
 }
 
 export const getServerSideProps: GetServerSideProps = async (req) => {
-  if (!req.query?.exams || req.query.exams.length < 3) {
+  if (!req.query?.exams || req.query.exams.length < 2) {
     return {
       notFound: true,
     };

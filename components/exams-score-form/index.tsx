@@ -37,7 +37,7 @@ export const ExamsScoreForm: FC<ExamsScoreFormProps> = ({ exams }) => {
     defaultValue: formDefaultValue,
   });
 
-  const disabled = scores.filter((item) => item.yourScore).length < 3;
+  const disabled = scores.filter((item) => item.yourScore).length < 2;
 
   const onSubmit = (data: {
     exams: (Exam & { yourScore: number | null })[];
