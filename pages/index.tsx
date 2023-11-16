@@ -6,7 +6,7 @@ import type { GetServerSideProps } from "next/types";
 
 export default function Index({ exams }: { exams: Exam[] }) {
   return (
-    <Layout title="Введите свои баллы ЕГЭ">
+    <Layout title="Калькулятор ЕГЭ">
       <ExamsScoreForm exams={exams} />
     </Layout>
   );

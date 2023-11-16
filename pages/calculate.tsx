@@ -53,10 +53,19 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
       const mandatoryExams = learningProfile.exams.filter(
         (exam) => exam.type === "mandatory",
       );
+      const electiveExams = learningProfile.exams.filter(
+        (exam) => exam.type === "elective",
+      );
       const queryExamsOnMandatoryExams = mandatoryExams.filter((exam) =>
         exams.includes(exam.examId.toString()),
       );
-      return mandatoryExams.length === queryExamsOnMandatoryExams.length;
+      const queryExamsOnElectiveExams = electiveExams.filter((exam) =>
+        exams.includes(exam.examId.toString()),
+      );
+      return (
+        mandatoryExams.length === queryExamsOnMandatoryExams.length &&
+        queryExamsOnElectiveExams.length > 0
+      );
     },
   );
   const learningDirections = await prisma.learningDirection.findMany({
