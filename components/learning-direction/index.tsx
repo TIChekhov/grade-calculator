@@ -13,13 +13,23 @@ export const LearningDirection: FC<LearningDirectionProps> = ({
 }) => {
   return (
     <Card padding="lg" radius="md" withBorder>
-      <Text fz={18} fw={600}>
+      <Text fz={18} fw={900}>
         {learningDirection.title}
       </Text>
-      <Accordion variant="filled" radius="md">
+      <Accordion
+        variant="filled"
+        radius="md"
+        styles={{
+          content: {
+            padding: 0,
+          },
+        }}
+      >
         {learningDirection.learningProfile.map((item) => (
           <Accordion.Item p={0} key={item.id} value={item.id.toString()}>
-            <Accordion.Control p={0}>{item.title}</Accordion.Control>
+            <Accordion.Control fz={18} p={0}>
+              {item.title}
+            </Accordion.Control>
             <Accordion.Panel>
               <LearningProfile learningProfile={item} />
             </Accordion.Panel>

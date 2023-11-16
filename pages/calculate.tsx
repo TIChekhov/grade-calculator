@@ -14,7 +14,7 @@ export default function Calculated({
     <Layout title="Направления подготовки">
       <Grid align="flex-start" grow>
         {learningDirections.map((learningDirection) => (
-          <Grid.Col key={learningDirection.id}>
+          <Grid.Col maw="100%" key={learningDirection.id}>
             <LearningDirection learningDirection={learningDirection} />
           </Grid.Col>
         ))}
@@ -40,14 +40,33 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
     },
     select: {
       id: true,
+      exams: {
+        select: {
+          type: true,
+          examId: true,
+        },
+      },
     },
   });
+  const filteredLearningProfiles = learningProfiles?.filter(
+    (learningProfile) => {
+      const mandatoryExams = learningProfile.exams.filter(
+        (exam) => exam.type === "mandatory",
+      );
+      const queryExamsOnMandatoryExams = mandatoryExams.filter((exam) =>
+        exams.includes(exam.examId.toString()),
+      );
+      return mandatoryExams.length === queryExamsOnMandatoryExams.length;
+    },
+  );
   const learningDirections = await prisma.learningDirection.findMany({
     where: {
       learningProfile: {
         some: {
           id: {
-            in: learningProfiles?.map((learningProfile) => learningProfile.id),
+            in: filteredLearningProfiles?.map(
+              (learningProfile) => learningProfile.id,
+            ),
           },
         },
       },

@@ -1,4 +1,13 @@
-import { Card, Container, Flex, Text } from "@mantine/core";
+import {
+  Badge,
+  Grid,
+  Chip,
+  Container,
+  Flex,
+  SimpleGrid,
+  Text,
+  Group,
+} from "@mantine/core";
 import type { FC, ReactNode } from "react";
 import type { LearningProfile as LearningProfileType } from "@/types";
 import styles from "./learning-direction.module.css";
@@ -15,25 +24,34 @@ export const LearningProfile: FC<LearningProfileProps> = ({
     .flatMap((item) => item.exam);
   const electiveExams = learningProfile.exams
     .filter((item) => item.type === "elective")
-    .flatMap((item) => item.exam.title)
-    .join(" / ");
+    .flatMap((item) => item.exam);
   return (
-    <Flex direction="row" gap={16} justify="space-between">
-      <Flex direction="column" gap={8}>
-        <Text fz={18} fw={600}>
-          Экзамены
-        </Text>
-        <Flex direction="column" gap={4}>
-          {mandatoryExams.map((item) => (
-            <Text key={item.id} fz={18} fw={400}>
-              {item.id}. {item.title}
-            </Text>
-          ))}
-          <Text fz={18} fw={400}>
-            {mandatoryExams.length + 1}. {electiveExams}
-          </Text>
-        </Flex>
-      </Flex>
+    <Flex direction="column" gap={16} justify="space-between">
+      <Group gap={8}>
+        {mandatoryExams.map((item) => (
+          <Badge
+            key={item.id}
+            style={{ textTransform: "none" }}
+            color="blue"
+            size="lg"
+          >
+            {item.title}
+          </Badge>
+        ))}
+        {electiveExams.map((item) => (
+          <Badge
+            key={item.id}
+            style={{ textTransform: "none" }}
+            variant="default"
+            size="lg"
+          >
+            {item.title}
+          </Badge>
+        ))}
+      </Group>
+      <Text style={{ whiteSpace: "pre-line" }} fz={18} fw={400}>
+        {learningProfile.description}
+      </Text>
     </Flex>
   );
 };
