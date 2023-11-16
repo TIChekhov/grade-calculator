@@ -11,7 +11,7 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
   return (
     <Container className={styles.layout}>
       <Text
-        fz={64}
+        fz={{ base: 32, xs: 40, sm: 48, md: 64 }}
         fw={900}
         variant="gradient"
         gradient={{ from: "blue", to: "cyan", deg: 90 }}
