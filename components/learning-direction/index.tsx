@@ -32,7 +32,12 @@ export const LearningDirection: FC<LearningDirectionProps> = ({
         }}
       >
         {learningDirection.learningProfile.map((item) => (
-          <Accordion.Item p={0} key={item.id} value={item.id.toString()}>
+          <Accordion.Item
+            bg="transparent"
+            p={0}
+            key={item.id}
+            value={item.id.toString()}
+          >
             <Accordion.Control fz={18} p={0}>
               {item.title}
             </Accordion.Control>

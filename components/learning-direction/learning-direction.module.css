@@ -2,7 +2,8 @@
   transition:
     border-color 100ms ease,
     color 100ms ease;
-  border: 1px solid transparent;
+  border: 1px solid
+    light-dark(var(--mantine-color-gray-1), var(--mantine-color-dark-6));
 
   @mixin hover {
     border: 1px solid
