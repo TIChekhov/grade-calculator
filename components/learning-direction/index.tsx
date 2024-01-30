@@ -1,7 +1,8 @@
+import type { LearningDirection as LearningDirectionType } from "@/types";
 import { Accordion, Card, Text } from "@mantine/core";
 import type { FC } from "react";
-import type { LearningDirection as LearningDirectionType } from "@/types";
 import { LearningProfile } from "../learning-profile";
+import styles from "./learning-direction.module.css";
 
 export interface LearningDirectionProps {
   learningDirection: LearningDirectionType;
@@ -11,13 +12,19 @@ export const LearningDirection: FC<LearningDirectionProps> = ({
   learningDirection,
 }) => {
   return (
-    <Card padding="lg" radius="md" withBorder>
+    <Card
+      className={styles.card}
+      shadow="lg"
+      padding="lg"
+      radius="xl"
+      withBorder
+    >
       <Text fz={18} fw={900}>
         {learningDirection.title}
       </Text>
       <Accordion
         variant="filled"
-        radius="md"
+        radius="lg"
         styles={{
           content: {
             padding: 0,

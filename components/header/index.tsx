@@ -14,7 +14,7 @@ import {
 import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import { FC } from "react";
-import classes from "./header.module.css";
+import styles from "./header.module.css";
 
 const mainLinks = [
   {
@@ -38,8 +38,8 @@ export const Header: FC = () => {
 
   return (
     <>
-      <Box className={classes.header}>
-        <Container px={32} size="xl" className={classes.inner}>
+      <Box className={styles.header}>
+        <Container px={32} size="xl" className={styles.inner}>
           <Link href="/">
             <ActionIcon
               color="gray"
@@ -57,13 +57,13 @@ export const Header: FC = () => {
             visibleFrom="md"
             gap={0}
             justify="flex-end"
-            className={classes.mainLinks}
+            className={styles.mainLinks}
           >
             {mainLinks.map((item, index) => (
               <Anchor<"a">
                 href={item.link}
                 key={item.label}
-                className={classes.mainLink}
+                className={styles.mainLink}
               >
                 {item.label}
               </Anchor>
@@ -77,7 +77,7 @@ export const Header: FC = () => {
           <Burger
             opened={opened}
             onClick={toggle}
-            className={classes.burger}
+            className={styles.burger}
             size="md"
             hiddenFrom="md"
           />
@@ -103,7 +103,7 @@ export const Header: FC = () => {
         overlayProps={{
           opacity: 0.5,
         }}
-        classNames={{ content: classes.drawerContent }}
+        classNames={{ content: styles.drawerContent }}
         size="md"
         withCloseButton
       >
@@ -113,7 +113,7 @@ export const Header: FC = () => {
               <Anchor<"a">
                 href={item.link}
                 key={item.label}
-                className={classes.mainLink}
+                className={styles.mainLink}
               >
                 {item.label}
                 <ArrowRightIcon />

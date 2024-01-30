@@ -38,7 +38,7 @@ export const ExamsScoreCard: FC<ExamsScoreCardProps> = ({
   return (
     <Card
       className={styles.card}
-      shadow="md"
+      shadow="lg"
       padding={16}
       radius="xl"
       withBorder

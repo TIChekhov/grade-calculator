@@ -10,6 +10,5 @@
   @mixin hover {
     border: 1px solid
       light-dark(var(--mantine-color-blue-6), var(--mantine-color-blue-8));
-    text-decoration: none;
   }
 }
