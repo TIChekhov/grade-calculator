@@ -1,18 +1,18 @@
 import type { MetaConfig } from "@/types";
 
 export const getWebsiteMeta = (
-  title: string = "Калькулятор баллов ЕГЭ",
-  description: string = "Калькулятор баллов ЕГЭ",
+  title: string = "Калькулятор ЕГЭ",
+  description: string = "Приемная комиссия ТГПИ",
   image?: string,
 ): MetaConfig => {
   const defaultTitle = title;
-  const defaultImage = `${process.env.APP_URL}/api/og`;
+  const defaultImage = `/twitter-image.png`;
   return {
     title: defaultTitle,
     description: description,
     image: image ?? defaultImage,
     openGraph: {
-      site_name: "Калькулятор баллов ЕГЭ",
+      site_name: "Калькулятор ЕГЭ",
       type: "website",
       url: `${process.env.APP_URL}`,
       title: defaultTitle,

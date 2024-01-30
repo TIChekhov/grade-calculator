@@ -2,16 +2,21 @@
 // All packages except `@mantine/hooks` require styles imports
 import "@mantine/core/styles.css";
 
+import { getWebsiteMeta } from "@/utils/meta";
 import { MantineProvider } from "@mantine/core";
+import { DefaultSeo } from "next-seo";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 
 export default function App({ Component, pageProps }: AppProps) {
+  /**
+   * Default app meta
+   */
+  const meta = getWebsiteMeta();
   return (
     <>
+      <DefaultSeo {...meta} />
       <Head>
-        <title>Калькулятор ЕГЭ</title>
-        <meta name="description" content="Приемная комиссия ТГПИ" />
         <meta
           name="viewport"
           content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
