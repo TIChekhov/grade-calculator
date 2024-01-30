@@ -33,7 +33,10 @@ export default function App({ Component, pageProps }: AppProps) {
           content="https://grade-calculator-woad.vercel.app/"
         />
         <meta name="twitter:title" content="Калькулятор ЕГЭ" />
-        <meta name="twitter:description" content="Приемная комиссия ТГПИ" />
+        <meta
+          name="twitter:description"
+          content="Приемная комиссия ТИ имени А.П.Чехова"
+        />
         <meta name="twitter:image" content="/twitter-image.png" />
         <link rel="shortcut icon" href="/favicon.svg" />
       </Head>
