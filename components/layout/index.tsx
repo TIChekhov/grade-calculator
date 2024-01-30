@@ -1,5 +1,4 @@
 import { AppShell, Container, Flex, Text } from "@mantine/core";
-import { useColorScheme } from "@mantine/hooks";
 import type { FC, ReactNode } from "react";
 import { Header } from "../header";
 import styles from "./layout.module.css";
@@ -10,7 +9,6 @@ export interface LayoutProps {
 }
 
 export const Layout: FC<LayoutProps> = ({ children, title }) => {
-  const scheme = useColorScheme();
   return (
     <AppShell>
       <AppShell.Header h={48}>
