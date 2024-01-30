@@ -1,7 +1,6 @@
-import { Accordion, Card, Container, Text } from "@mantine/core";
-import type { FC, ReactNode } from "react";
+import { Accordion, Card, Text } from "@mantine/core";
+import type { FC } from "react";
 import type { LearningDirection as LearningDirectionType } from "@/types";
-import styles from "./learning-direction.module.css";
 import { LearningProfile } from "../learning-profile";
 
 export interface LearningDirectionProps {

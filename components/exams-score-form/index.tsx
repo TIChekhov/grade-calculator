@@ -1,22 +1,26 @@
-import { useForm, useWatch } from "react-hook-form";
-import styles from "./exams-score-form.module.css";
-import { Button, Grid, Text, TextInput } from "@mantine/core";
 import type { Exam } from "@/types";
-import { useState, type FC, Fragment } from "react";
+import { Button, SimpleGrid, Text } from "@mantine/core";
 import { useRouter } from "next/router";
+import { useState, type FC } from "react";
+import { useForm, useWatch } from "react-hook-form";
+import { ExamsScoreCard, FormExam } from "../exams-score-card";
+import styles from "./exams-score-form.module.css";
 
 interface ExamsScoreFormProps {
   exams: Exam[];
 }
 
+const findExamIndex = (id: number, exams: Exam[]) => {
+  return exams.findIndex((exam) => exam.id === id);
+};
+
 export const ExamsScoreForm: FC<ExamsScoreFormProps> = ({ exams }) => {
-  const formDefaultValue = exams.map((exam) => ({
+  const formDefaultValue: FormExam[] = exams.map((exam) => ({
     ...exam,
     yourScore: null,
   }));
-  const firstAdditionalExamIndex = exams.findIndex(
-    (exam) => exam.type === "additional",
-  );
+  const mainExams = exams.filter((exam) => exam.type === "main");
+  const additionalExams = exams.filter((exam) => exam.type === "additional");
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const {
@@ -28,7 +32,7 @@ export const ExamsScoreForm: FC<ExamsScoreFormProps> = ({ exams }) => {
     defaultValues: {
       exams: formDefaultValue,
     },
-    mode: "onSubmit",
+    mode: "onBlur",
   });
 
   const scores = useWatch({
@@ -39,9 +43,7 @@ export const ExamsScoreForm: FC<ExamsScoreFormProps> = ({ exams }) => {
 
   const disabled = scores.filter((item) => item.yourScore).length < 2;
 
-  const onSubmit = (data: {
-    exams: (Exam & { yourScore: number | null })[];
-  }) => {
+  const onSubmit = (data: { exams: FormExam[] }) => {
     setLoading(true);
     router.push({
       pathname: "/calculate",
@@ -55,56 +57,59 @@ export const ExamsScoreForm: FC<ExamsScoreFormProps> = ({ exams }) => {
 
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
-      <Grid align="flex-start">
-        {exams.map((item, index) => (
-          <Fragment key={item.id}>
-            {firstAdditionalExamIndex === index && (
-              <Grid.Col span={8}></Grid.Col>
-            )}
-            <Grid.Col span={{ base: 12, xs: 6, 1920: 4 }}>
-              <TextInput
-                w="100%"
-                size="xl"
-                radius="md"
-                type="text"
-                placeholder={`От ${item.minScore} до 100`}
-                maxLength={3}
-                labelProps={{
-                  pb: "4px",
-                }}
-                label={
-                  <Text fz={18} fw={400}>
-                    {item.title}
-                  </Text>
-                }
-                description={item.description}
-                error={errors?.exams?.[index]?.yourScore?.message}
-                {...register(`exams.${index}.yourScore` as const, {
-                  validate: (value: string | null) => {
-                    if (value) {
-                      const parsedValue = parseInt(value, 10);
-                      if (!parsedValue) {
-                        return "Введите корректное значение баллов";
-                      }
-                      if (parsedValue < item.minScore) {
-                        return "Не набрано минимальное количество баллов";
-                      }
-                    }
-                  },
-                })}
-              />
-            </Grid.Col>
-          </Fragment>
+      <Text fz={24} fw={500}>
+        Общие предметы
+      </Text>
+      <SimpleGrid
+        className={styles.grid}
+        cols={{ base: 1, sm: 2, md: 3, xl: 4 }}
+        spacing={24}
+      >
+        {mainExams.map((item) => (
+          <ExamsScoreCard
+            key={item.id}
+            exam={item}
+            index={findExamIndex(item.id, exams)}
+            error={
+              errors?.exams?.[findExamIndex(item.id, exams)]?.yourScore?.message
+            }
+            register={register}
+          />
         ))}
-      </Grid>
+      </SimpleGrid>
+      <Text fz={24} fw={500}>
+        Предметы где экзамен проводится ВУЗом самостоятельно
+      </Text>
+      <SimpleGrid
+        className={styles.grid}
+        cols={{ base: 1, sm: 2, md: 3, xl: 4 }}
+        spacing={24}
+      >
+        {additionalExams.map((item) => (
+          <ExamsScoreCard
+            key={item.id}
+            exam={item}
+            index={findExamIndex(item.id, exams)}
+            error={
+              errors?.exams?.[findExamIndex(item.id, exams)]?.yourScore?.message
+            }
+            register={register}
+          />
+        ))}
+      </SimpleGrid>
       <Button
-        size="xl"
-        radius="md"
+        w={{
+          base: "calc(100%)",
+          sm: "calc(50% - 12px)",
+          md: "calc(33% - 12px)",
+          xl: "calc(25% - 12px)",
+        }}
+        size="lg"
+        radius="lg"
         type="submit"
         loading={loading}
         disabled={disabled}
-        variant="gradient"
-        gradient={{ from: "blue", to: "cyan", deg: 90 }}
+        color="blue"
       >
         Искать
       </Button>

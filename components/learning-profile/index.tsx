@@ -1,16 +1,6 @@
-import {
-  Badge,
-  Grid,
-  Chip,
-  Container,
-  Flex,
-  SimpleGrid,
-  Text,
-  Group,
-} from "@mantine/core";
-import type { FC, ReactNode } from "react";
+import { Badge, Flex, Text, Group } from "@mantine/core";
+import type { FC } from "react";
 import type { LearningProfile as LearningProfileType } from "@/types";
-import styles from "./learning-direction.module.css";
 
 export interface LearningProfileProps {
   learningProfile: LearningProfileType;

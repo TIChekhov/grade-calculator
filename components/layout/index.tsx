@@ -1,8 +1,8 @@
 import { AppShell, Container, Flex, Text } from "@mantine/core";
-import type { FC, ReactNode } from "react";
-import styles from "./layout.module.css";
-import CheckhovIcon from "@/public/safari-pinned-tab.svg";
 import { useColorScheme } from "@mantine/hooks";
+import type { FC, ReactNode } from "react";
+import { Header } from "../header";
+import styles from "./layout.module.css";
 
 export interface LayoutProps {
   children: ReactNode;
@@ -13,8 +13,11 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
   const scheme = useColorScheme();
   return (
     <AppShell>
-      <AppShell.Main>
-        <Container className={styles.layout}>
+      <AppShell.Header h={48}>
+        <Header />
+      </AppShell.Header>
+      <AppShell.Main pt={80}>
+        <Container size="xl" className={styles.layout}>
           <Flex align="center" direction="row" justify="space-between">
             {/* <CheckhovIcon
               width="64px"
@@ -25,7 +28,7 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
               fz={{ base: 32, xs: 40, sm: 48, md: 64 }}
               fw={900}
               variant="gradient"
-              gradient={{ from: "blue", to: "cyan", deg: 90 }}
+              gradient={{ from: "blue", to: "blue", deg: 90 }}
             >
               {title}
             </Text>

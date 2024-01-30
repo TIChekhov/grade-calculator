@@ -38,3 +38,32 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+
+"dependencies": {
+"@mantine/core": "^7.4.2",
+"@mantine/hooks": "^7.4.2",
+"@prisma/client": "^5.8.1",
+"@vercel/og": "^0.6.2",
+"framer-motion": "^10.18.0",
+"next": "^14.1.0",
+"next-seo": "^6.4.0",
+"next-sitemap": "^4.2.3",
+"react": "^18",
+"react-dom": "^18",
+"react-hook-form": "7.48.2"
+},
+"devDependencies": {
+"@next/bundle-analyzer": "^14.1.0",
+"@svgr/webpack": "^8.1.0",
+"@types/node": "^20",
+"@types/react": "^18",
+"@types/react-dom": "^18",
+"eslint": "^8",
+"eslint-config-next": "^14.1.0",
+"postcss": "^8.4.33",
+"postcss-preset-mantine": "^1.12.3",
+"postcss-simple-vars": "^7.0.1",
+"prettier": "^3.2.4",
+"prisma": "^5.8.1",
+"typescript": "^5"
+},
