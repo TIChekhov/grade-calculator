@@ -97,7 +97,7 @@ export const ExamsScoreForm: FC<ExamsScoreFormProps> = ({ exams }) => {
         w={{
           base: "calc(100% - 64px)",
           sm: "calc(50% - 12px)",
-          md: "calc(33% - 12px)",
+          md: `calc(${100 / 3}% - 12px)`,
           xl: "calc(25% - 20px)",
         }}
         className={styles.bottom}
