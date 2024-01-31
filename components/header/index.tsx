@@ -44,7 +44,7 @@ export const Header: FC = () => {
             <ActionIcon
               color="gray"
               radius="xs"
-              title="Logo"
+              title="Лого"
               aria-label="logo-button"
               variant="transparent"
               w={123}
@@ -53,28 +53,35 @@ export const Header: FC = () => {
               <TgpiLogo width={123} height={60} />
             </ActionIcon>
           </Link>
-          <Group
-            visibleFrom="md"
-            gap={0}
-            justify="flex-end"
-            className={styles.mainLinks}
-          >
-            {mainLinks.map((item, index) => (
-              <Anchor<"a">
-                href={item.link}
-                key={item.label}
-                className={styles.mainLink}
-              >
-                {item.label}
-              </Anchor>
-            ))}
+          <Group visibleFrom="md" gap={8} justify="flex-end">
+            <Group gap={0}>
+              {mainLinks.map((item, index) => (
+                <Anchor<"a">
+                  href={item.link}
+                  key={item.label}
+                  className={styles.mainLink}
+                >
+                  {item.label}
+                </Anchor>
+              ))}
+            </Group>
+
             <Link href="https://pk.rsue.ru/">
-              <Button size="sm" radius="lg" type="submit" color="blue">
+              <Button
+                size="sm"
+                radius="lg"
+                type="submit"
+                color="blue"
+                title="Подать документы"
+                aria-label="send-documents-button"
+              >
                 Подать документы
               </Button>
             </Link>
           </Group>
           <Burger
+            aria-label="menu"
+            title="Меню"
             opened={opened}
             onClick={toggle}
             className={styles.burger}
@@ -88,7 +95,7 @@ export const Header: FC = () => {
           <ActionIcon
             color="gray"
             radius="xs"
-            title="Logo"
+            title="Лого"
             aria-label="logo-button"
             variant="transparent"
             w={123}
@@ -122,7 +129,15 @@ export const Header: FC = () => {
             ))}
           </Flex>
           <Link className={styles.bottom} href="https://pk.rsue.ru/">
-            <Button w="100%" size="md" radius="lg" type="submit" color="blue">
+            <Button
+              title="Подать документы"
+              aria-label="send-documents-button"
+              w="100%"
+              size="md"
+              radius="lg"
+              type="submit"
+              color="blue"
+            >
               Подать документы
             </Button>
           </Link>

@@ -107,6 +107,8 @@ export const ExamsScoreForm: FC<ExamsScoreFormProps> = ({ exams }) => {
         loading={loading}
         disabled={disabled}
         color="blue"
+        title="Искать"
+        aria-label="search-button"
       >
         Искать
       </Button>

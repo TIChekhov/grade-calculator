@@ -51,6 +51,7 @@ export const ExamsScoreCard: FC<ExamsScoreCardProps> = ({
         size="md"
         radius="lg"
         type="text"
+        aria-label={exam.title}
         placeholder={`От ${exam.minScore} до 100`}
         maxLength={3}
         descriptionProps={{

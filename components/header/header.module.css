@@ -21,7 +21,7 @@
   gap: 24px;
   font-size: var(--mantine-font-size-md);
   color: light-dark(var(--mantine-color-gray-6), var(--mantine-color-dark-1));
-  padding: var(--mantine-spacing-sm);
+  padding: var(--mantine-spacing-xs);
   font-weight: 500;
   transition:
     border-color 100ms ease,
