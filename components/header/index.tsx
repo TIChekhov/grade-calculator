@@ -111,6 +111,7 @@ export const Header: FC = () => {
           <Flex direction="column">
             {mainLinks.map((item, index) => (
               <Anchor<"a">
+                px={0}
                 href={item.link}
                 key={item.label}
                 className={styles.mainLink}

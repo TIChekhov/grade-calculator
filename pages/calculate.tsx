@@ -2,8 +2,10 @@ import { Layout } from "@/components/layout";
 import { LearningDirection } from "@/components/learning-direction";
 import { prisma } from "@/prisma/prisma";
 import type { LearningDirection as LearningDirectionType } from "@/types";
-import { Grid } from "@mantine/core";
+import { Flex, Grid, Image, Text } from "@mantine/core";
+import NextImage from "next/image";
 import type { GetServerSideProps } from "next/types";
+import Chekhov from "../public/chekhov.webp";
 
 export default function Calculated({
   learningDirections,
@@ -19,6 +21,19 @@ export default function Calculated({
           </Grid.Col>
         ))}
       </Grid>
+      {learningDirections.length === 0 && (
+        <Flex align="center" justify="center" direction="column" gap={24}>
+          <Image
+            component={NextImage}
+            w={{ base: 260, xs: 300, sm: 340, md: 380, lg: 420, xl: 460 }}
+            src={Chekhov}
+            alt="Chekhov"
+          />
+          <Text fz={24} fw={500}>
+            Тут пусто
+          </Text>
+        </Flex>
+      )}
     </Layout>
   );
 }
