@@ -15,7 +15,7 @@ export const Layout: FC<LayoutProps> = ({ children, title }) => {
         <Header />
       </AppShell.Header>
       <AppShell.Main pt={80}>
-        <Container size="xl" className={styles.layout}>
+        <Container size="xl" pb={128} className={styles.layout}>
           <Flex align="center" direction="row" justify="space-between">
             {/* <CheckhovIcon
               width="64px"

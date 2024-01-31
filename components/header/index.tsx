@@ -120,7 +120,7 @@ export const Header: FC = () => {
               </Anchor>
             ))}
           </Flex>
-          <Link href="https://pk.rsue.ru/">
+          <Link className={styles.bottom} href="https://pk.rsue.ru/">
             <Button w="100%" size="md" radius="lg" type="submit" color="blue">
               Подать документы
             </Button>

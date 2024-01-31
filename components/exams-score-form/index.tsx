@@ -80,11 +80,7 @@ export const ExamsScoreForm: FC<ExamsScoreFormProps> = ({ exams }) => {
       <Text fz={24} fw={500}>
         Предметы где экзамен проводится ВУЗом самостоятельно
       </Text>
-      <SimpleGrid
-        className={styles.grid}
-        cols={{ base: 1, sm: 2, md: 3, xl: 4 }}
-        spacing={24}
-      >
+      <SimpleGrid cols={{ base: 1, sm: 2, md: 3, xl: 4 }} spacing={24}>
         {additionalExams.map((item) => (
           <ExamsScoreCard
             key={item.id}
@@ -99,11 +95,12 @@ export const ExamsScoreForm: FC<ExamsScoreFormProps> = ({ exams }) => {
       </SimpleGrid>
       <Button
         w={{
-          base: "calc(100%)",
+          base: "calc(100% - 64px)",
           sm: "calc(50% - 12px)",
           md: "calc(33% - 12px)",
-          xl: "calc(25% - 12px)",
+          xl: "calc(25% - 20px)",
         }}
+        className={styles.bottom}
         size="lg"
         radius="lg"
         type="submit"

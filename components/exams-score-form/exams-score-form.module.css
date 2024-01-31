@@ -4,8 +4,24 @@
   gap: 32px;
 }
 
-.grid {
-  @media (min-width: 105em) {
-    --sg-cols: 5;
+.bottom {
+  bottom: 48px;
+  position: fixed;
+  z-index: 3;
+  &:disabled,
+  &[data-disabled] {
+    border-color: light-dark(
+      var(--mantine-color-gray-1),
+      var(--mantine-color-dark-4)
+    );
+    background-color: light-dark(
+      var(--mantine-color-gray-1),
+      var(--mantine-color-dark-7)
+    );
+  }
+
+  @media (min-width: $mantine-breakpoint-sm) {
+    position: relative;
+    bottom: 0px;
   }
 }
