@@ -45,11 +45,12 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
     };
   }
   const exams = req.query.exams as string[];
+  const examsIds = exams.map((exam) => parseInt(exam, 10));
   const learningProfiles = await prisma.learningProfile.findMany({
     where: {
       exams: {
         some: {
-          examId: { in: exams?.map((exam) => parseInt(exam, 10)) },
+          examId: { in: examsIds },
         },
       },
     },
@@ -59,6 +60,11 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
         select: {
           type: true,
           examId: true,
+          exam: {
+            select: {
+              type: true,
+            },
+          },
         },
       },
     },
@@ -71,26 +77,40 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
       const electiveExams = learningProfile.exams.filter(
         (exam) => exam.type === "elective",
       );
+      const additionalExams = learningProfile.exams.filter(
+        (exam) => exam.exam.type === "additional",
+      );
       const queryExamsOnMandatoryExams = mandatoryExams.filter((exam) =>
-        exams.includes(exam.examId.toString()),
+        examsIds.includes(exam.examId),
       );
       const queryExamsOnElectiveExams = electiveExams.filter((exam) =>
-        exams.includes(exam.examId.toString()),
+        examsIds.includes(exam.examId),
       );
+      const queryExamsOnAdditionalExams = [
+        ...queryExamsOnMandatoryExams.filter(
+          (exam) => exam.exam.type === "additional",
+        ),
+        ...queryExamsOnElectiveExams.filter(
+          (exam) => exam.exam.type === "additional",
+        ),
+      ];
       return (
-        mandatoryExams.length === queryExamsOnMandatoryExams.length &&
-        queryExamsOnElectiveExams.length > 0
+        (mandatoryExams.length === queryExamsOnMandatoryExams.length &&
+          (queryExamsOnElectiveExams.length > 0 ||
+            queryExamsOnAdditionalExams.length > 0)) ||
+        (queryExamsOnMandatoryExams.length > 1 && additionalExams.length > 0)
       );
     },
+  );
+  const filteredLearningProfilesIds = filteredLearningProfiles?.map(
+    (learningProfile) => learningProfile.id,
   );
   const learningDirections = await prisma.learningDirection.findMany({
     where: {
       learningProfile: {
         some: {
           id: {
-            in: filteredLearningProfiles?.map(
-              (learningProfile) => learningProfile.id,
-            ),
+            in: filteredLearningProfilesIds,
           },
         },
       },
@@ -121,5 +141,11 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
       },
     },
   });
-  return { props: { learningDirections: learningDirections ?? [] } };
+  const filteredLearningDirections = learningDirections.map((item) => ({
+    ...item,
+    learningProfile: item.learningProfile.filter((item) =>
+      filteredLearningProfilesIds.includes(item.id),
+    ),
+  }));
+  return { props: { learningDirections: filteredLearningDirections ?? [] } };
 };

@@ -78,7 +78,7 @@ export const ExamsScoreForm: FC<ExamsScoreFormProps> = ({ exams }) => {
         ))}
       </SimpleGrid>
       <Text fz={24} fw={500}>
-        Предметы где экзамен проводится ВУЗом самостоятельно
+        Экзамен проводится ВУЗом самостоятельно
       </Text>
       <SimpleGrid cols={{ base: 1, sm: 2, md: 3, xl: 4 }} spacing={24}>
         {additionalExams.map((item) => (
