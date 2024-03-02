@@ -2,7 +2,7 @@ import type { MetaConfig } from "@/types";
 
 export const getWebsiteMeta = (
   title: string = "Калькулятор ЕГЭ | ТИ имени А.П.Чехова",
-  description: string = "Приемная комиссия ТИ имени А.П.Чехова",
+  description: string = "Приёмная комиссия ТИ имени А.П.Чехова",
   image?: string,
 ): MetaConfig => {
   const defaultTitle = title;

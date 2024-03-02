@@ -1,5 +1,5 @@
 import type { Exam } from "@/types";
-import { Button, SimpleGrid, Text } from "@mantine/core";
+import { Button, Flex, SimpleGrid, Text } from "@mantine/core";
 import { useRouter } from "next/router";
 import { useState, type FC } from "react";
 import { useForm, useWatch } from "react-hook-form";
@@ -58,7 +58,7 @@ export const ExamsScoreForm: FC<ExamsScoreFormProps> = ({ exams }) => {
   return (
     <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
       <Text fz={24} fw={500}>
-        Общие предметы
+        Общеобразовательные предметы
       </Text>
       <SimpleGrid
         className={styles.grid}
@@ -77,9 +77,14 @@ export const ExamsScoreForm: FC<ExamsScoreFormProps> = ({ exams }) => {
           />
         ))}
       </SimpleGrid>
-      <Text fz={24} fw={500}>
-        Экзамен проводится ВУЗом самостоятельно
-      </Text>
+      <Flex direction="column" gap={8}>
+        <Text fz={24} fw={500}>
+          Вступительные испытания творческой направленности
+        </Text>
+        <Text c="gray" fz={16} fw={400}>
+          (Экзамен проводится ВУЗом самостоятельно)
+        </Text>
+      </Flex>
       <SimpleGrid cols={{ base: 1, sm: 2, md: 3, xl: 4 }} spacing={24}>
         {additionalExams.map((item) => (
           <ExamsScoreCard

@@ -30,7 +30,7 @@ export default function Calculated({
             alt="Chekhov"
           />
           <Text fz={24} fw={500}>
-            Тут пусто
+            Варианты для поступления отсутствуют
           </Text>
         </Flex>
       )}

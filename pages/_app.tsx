@@ -38,7 +38,7 @@ export default function App({ Component, pageProps }: AppProps) {
         />
         <meta
           name="twitter:description"
-          content="Приемная комиссия ТИ имени А.П.Чехова"
+          content="Приёмная комиссия ТИ имени А.П.Чехова"
         />
         <meta name="twitter:image" content="/twitter-image.png" />
         <link rel="shortcut icon" href="/favicon.svg" />
