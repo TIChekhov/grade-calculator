@@ -14,6 +14,11 @@ export default function Index({ exams }: { exams: Exam[] }) {
 
 export const getServerSideProps: GetServerSideProps = async () => {
   const exams = await prisma.examSubject.findMany({
+    orderBy: [
+      {
+        id: "asc",
+      },
+    ],
     select: {
       id: true,
       title: true,

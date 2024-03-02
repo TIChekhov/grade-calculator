@@ -47,6 +47,11 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
   const exams = req.query.exams as string[];
   const examsIds = exams.map((exam) => parseInt(exam, 10));
   const learningProfiles = await prisma.learningProfile.findMany({
+    orderBy: [
+      {
+        id: "asc",
+      },
+    ],
     where: {
       exams: {
         some: {
@@ -106,6 +111,11 @@ export const getServerSideProps: GetServerSideProps = async (req) => {
     (learningProfile) => learningProfile.id,
   );
   const learningDirections = await prisma.learningDirection.findMany({
+    orderBy: [
+      {
+        id: "asc",
+      },
+    ],
     where: {
       learningProfile: {
         some: {
