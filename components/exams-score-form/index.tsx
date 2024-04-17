@@ -27,7 +27,7 @@ export const ExamsScoreForm: FC<ExamsScoreFormProps> = ({ exams }) => {
     control,
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
   } = useForm({
     defaultValues: {
       exams: formDefaultValue,
@@ -41,7 +41,8 @@ export const ExamsScoreForm: FC<ExamsScoreFormProps> = ({ exams }) => {
     defaultValue: formDefaultValue,
   });
 
-  const disabled = scores.filter((item) => item.yourScore).length < 2;
+  const disabled =
+    scores.filter((item) => item.yourScore).length < 2 || !isValid;
 
   const onSubmit = (data: { exams: FormExam[] }) => {
     setLoading(true);
