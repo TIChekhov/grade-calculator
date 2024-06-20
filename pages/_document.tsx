@@ -45,6 +45,15 @@ export default function Document() {
                 webvisor:true
           });`}
         </Script>
+        <noscript>
+          <div>
+            <img
+              src="https://mc.yandex.ru/watch/97592669"
+              style={{ position: "absolute", left: "-9999px;" }}
+              alt=""
+            />
+          </div>
+        </noscript>
       </body>
     </Html>
   );
